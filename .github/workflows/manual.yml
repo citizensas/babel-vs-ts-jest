@@ -6,19 +6,27 @@ on: workflow_dispatch
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  test:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - run: yarn install
+
+  test-with-babel-jest:
+    name: Run tests with babel-jest
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    needs: prepare
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
-    # Runs a single command using the runners shell
-    - name: Install node modules.
-      run: yarn install
-    - name: Run tests with babel-jest.
-      run: yarn test --ci --config jest.config.js
-    - name: Run tests with ts-jest.
-      run: yarn test --ci --config ts-jest.config.js
+      - run: yarn test --ci --config jest.config.js
+
+  test-with-ts-jest:
+    name: Run tests with ts-jest.
+    runs-on: ubuntu-latest
+    needs: prepare
+    steps:
+      - run: yarn test --ci --config ts-jest.config.js
