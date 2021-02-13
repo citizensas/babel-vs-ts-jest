@@ -1,0 +1,7 @@
+node_modules/
+
+# IntelliJ settings
+*.iml
+.idea/
+.DS_Store
+

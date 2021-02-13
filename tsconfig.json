@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "es5",
+    "outDir": "es",
+  },
+  "compileOnSave": false,
+  "buildOnSave": false
+}
